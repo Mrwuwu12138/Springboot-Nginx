@@ -6,6 +6,11 @@
 </head>
 <script src="js/jquery.min.js"></script>
 <body>
+<div align="center" style="color: red;">
+    <h1>
+        显示的是端口为&nbsp;<span id="post"></span>&nbsp;的这台服务器
+    </h1>
+</div>
 <table border="1" width="60%" align="center" id="test">
     <thead>
        <tr>
@@ -29,6 +34,17 @@
                 for (var i = 0; i < data.length; i++) {
                     $("#test tbody").append('<tr align="center"><td>'+data[i].id+'</td><td>'+data[i].name+'</td></tr>');
                 }
+            },
+            error: function (data) {
+                console.log("获取数据出错");
+            }
+        })
+        $.ajax({
+            url: "/getPost",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#post").html(data);
             },
             error: function (data) {
                 console.log("获取数据出错");
